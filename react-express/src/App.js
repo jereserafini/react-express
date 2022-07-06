@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import NoteModal from "./components/NoteModal";
 import Select from "./components/Select";
-import { saveNotes } from "./services/notesService";
+import { getNotes, saveNotes } from "./services/notesService";
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -19,12 +19,8 @@ function App() {
   useEffect(() => {
 
     //ACA TENGO QUE RECIBIR LAS NOTAS DEL BACKEND
-
-    const savedNotes = JSON.parse(localStorage.getItem("notes"));
-
-    if (savedNotes) {
-      setNotes(savedNotes);
-    }
+    getNotes(setNotes)
+    
   }, []);
 
   useEffect(() => {
